@@ -2,8 +2,9 @@
 body {
     margin: 0;
     font-family: 'Pixelify Sans', sans-serif; /* Primary content font */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: none; /* Changed from antialiased to 'none' for sharp pixel rendering */
+    -moz-osx-font-smoothing: grayscale; /* Can also be 'none' for consistency, but 'grayscale' often works fine */
+    image-rendering: pixelated; /* Crucial for ensuring pixel art sharpness throughout */
     overflow-x: hidden; /* Prevent horizontal scroll */
     background: #ecf0f1; /* Default background for the whole app */
 }
@@ -38,7 +39,7 @@ code {
 .App-header { /* This might be for a different header component, keeping as is */
     background-color: #282c34;
     padding: 2rem;
-    color: #ecf0f1;
+    color: #ecf0f1; /* Light text color on dark background */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -52,6 +53,8 @@ code {
     font-size: 1.5rem;
     margin-bottom: 1rem;
     text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.4);
+    -webkit-font-smoothing: none; /* Ensure pixel rendering for this specific title too */
+    image-rendering: pixelated; /* Ensure pixel rendering for this specific title */
 }
 
 .App-header p {
