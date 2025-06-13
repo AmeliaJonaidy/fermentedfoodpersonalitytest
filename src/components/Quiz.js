@@ -1,36 +1,28 @@
 import React, { useState } from 'react';
-import '../styles/Quiz.css';
+import '../styles/Quiz.css'; // Make sure this CSS file is present for Quiz styles
 
-const compatibility = {
-  Kimchi: {
-    bestMatch: "Kombucha",
-    worstMatch: "Miso",
-    bestDescription: "Your fiery energy pairs perfectly with Kombucha's effervescent spirit, creating dynamic and exciting interactions!",
-    worstDescription: "Miso's contemplative nature might find your intensity overwhelming at times."
-  },
-  Miso: {
-    bestMatch: "Sauerkraut",
-    worstMatch: "Kimchi",
-    bestDescription: "Your deep wisdom resonates with Sauerkraut's steadfast nature, forming a strong foundation of mutual understanding.",
-    worstDescription: "Kimchi's explosive energy might disrupt your peaceful contemplation."
-  },
-  Kombucha: {
-    bestMatch: "Kimchi",
-    worstMatch: "Sauerkraut",
-    bestDescription: "Your adaptable nature complements Kimchi's passionate energy, sparking creativity and adventure!",
-    worstDescription: "Sauerkraut's structured approach might feel too constraining for your free spirit."
-  },
-  Sauerkraut: {
-    bestMatch: "Miso",
-    worstMatch: "Kombucha",
-    bestDescription: "Your methodical nature aligns perfectly with Miso's patient wisdom, creating lasting harmony.",
-    worstDescription: "Kombucha's spontaneity might challenge your preference for order and structure."
-  }
-};
-
-const questions = [
+// Combined questions, results, and compatibility data
+const allQuestions = [
   {
-    id: 1,
+    text: "How do you approach new experiences?",
+    options: [
+      { text: "With fiery enthusiasm and bold curiosity", type: "Kimchi" },
+      { text: "With patient wisdom and careful consideration", type: "Miso" },
+      { text: "With free-spirited adaptability", type: "Kombucha" },
+      { text: "With steady reliability and tradition", type: "Sauerkraut" }
+    ]
+  },
+  {
+    text: "What's your ideal way to spend a weekend?",
+    options: [
+      { text: "Exploring new and exciting activities", type: "Kimchi" },
+      { text: "Quietly reflecting and learning", type: "Miso" },
+      { text: "Going with the flow and being spontaneous", type: "Kombucha" },
+      { text: "Following comfortable routines", type: "Sauerkraut" }
+    ]
+  },
+  {
+    id: 1, // Note: id is not used in logic, but kept for completeness
     text: "How do you approach learning new recipes or cooking techniques?",
     options: [
       { text: "Dive in with passion, experimenting boldly with flavors", type: "Kimchi" },
@@ -131,55 +123,144 @@ const questions = [
   }
 ];
 
-const results = {
+const allResults = {
   Kimchi: {
-    name: "Kimchi",
-    description: "You're bold, vibrant, and full of energy! Like the fiery Korean staple, you bring heat and excitement to any situation. Your passion is contagious, and you're not afraid to stand out with your unique flavor. Just as kimchi transforms ordinary ingredients into something extraordinary, you have the power to elevate any situation with your dynamic presence.",
+    name: "The Fiery Pioneer",
+    pixelArt: "🌶️",
+    description: "Like the vibrant layers of Kimchi, you are a masterpiece of bold flavors and dynamic energy! Just as this Korean staple transforms through fermentation, you have an incredible ability to turn ordinary situations into extraordinary opportunities. Your presence adds a distinctive kick to any group, making life more exciting for everyone around you. You're not afraid to speak your truth and stand out, just like Kimchi's unmistakable aroma and taste.",
     characteristics: [
-      "Bold and adventurous spirit",
-      "Natural leader with spicy charisma",
-      "Transformative influence on others",
-      "Strong cultural appreciation"
+      "Natural trendsetter who inspires others to be bold",
+      "Thrives in high-energy environments and challenging situations",
+      "Master of transformation and personal growth",
+      "Brings passion and spice to every interaction",
+      "Protective of loved ones like Kimchi's probiotic shield",
+      "Creates lasting impressions that strengthen over time",
+      "Embraces change with enthusiasm and adaptability"
     ],
-    pixelArt: "🌶️"
+    personalityInsights: {
+      strengths: [
+        "Your enthusiasm is contagious and motivates others",
+        "You have a remarkable ability to transform negative situations into positive ones",
+        "Your authentic self-expression encourages others to be genuine"
+      ],
+      growthAreas: [
+        "Sometimes your intense energy might overwhelm quieter personalities",
+        "Learning to balance your fiery nature with moments of calm",
+        "Being patient with those who prefer a slower pace"
+      ]
+    }
   },
   Miso: {
-    name: "Miso",
-    description: "You're deep, complex, and wonderfully nuanced. Like the ancient Japanese ferment, you get better with time, and people appreciate your subtle but profound influence. Your wisdom comes from patience and deep reflection, and like miso's umami, you add depth to everything you touch.",
+    name: "The Wise Sage",
+    pixelArt: "🫘",
+    description: "You embody the profound depth and complexity of Miso, a fermented treasure that gains wisdom with time. Like the various stages of Miso fermentation, you understand that the best things in life require patience and nurturing. Your presence adds depth and umami to social situations, bringing out the best in others just as Miso enhances every dish it touches. You're the friend others seek for guidance, knowing your insights are aged to perfection.",
     characteristics: [
-      "Deep emotional intelligence",
-      "Patient and nurturing nature",
-      "Rich in wisdom and experience",
-      "Subtle yet powerful presence"
+      "Natural mediator with deep emotional intelligence",
+      "Patient observer who sees beyond surface appearances",
+      "Bearer of ancestral wisdom and timeless knowledge",
+      "Creates harmony in any environment you enter",
+      "Nurturing mentor who helps others grow",
+      "Values authenticity and deep connections",
+      "Balances tradition with gentle innovation"
     ],
-    pixelArt: "🫘"
+    personalityInsights: {
+      strengths: [
+        "Your patience allows you to see long-term patterns others miss",
+        "You have an innate ability to bring out others' hidden potential",
+        "Your presence creates a sense of calm and stability"
+      ],
+      growthAreas: [
+        "Being more open to quick changes and spontaneity",
+        "Sharing your wisdom more proactively",
+        "Avoiding overthinking in simple situations"
+      ]
+    }
   },
   Kombucha: {
-    name: "Kombucha",
-    description: "You're effervescent and adaptable! Like the fizzy fermented tea, you bring a refreshing and unique perspective to life. Your bubbly personality helps others see things in new ways, and you're constantly evolving while maintaining your essential nature. You're the perfect blend of tradition and innovation.",
+    name: "The Effervescent Innovator",
+    pixelArt: "🫖",
+    description: "You sparkle with the vibrant energy of Kombucha, a living drink that's always evolving! Like the SCOBY that transforms sweet tea into a complex elixir, you have an amazing ability to adapt and grow while maintaining your essential nature. Your personality bubbles with creative ideas and refreshing perspectives, making you a natural catalyst for positive change. You're the perfect blend of traditional wisdom and modern innovation.",
     characteristics: [
-      "Naturally energetic and uplifting",
-      "Adaptable and ever-evolving",
-      "Social catalyst and connector",
-      "Health-conscious and balanced"
+      "Born experimenter who loves trying new combinations",
+      "Adaptable and resilient in any environment",
+      "Natural networker who connects different groups",
+      "Brings refreshing energy to stale situations",
+      "Balances health and enjoyment in life choices",
+      "Transforms negative energy into positive outcomes",
+      "Embodies both ancient wisdom and modern trends"
     ],
-    pixelArt: "🫖"
+    personalityInsights: {
+      strengths: [
+        "Your adaptability helps you thrive in changing environments",
+        "You naturally bring people together and create community",
+        "Your innovative spirit inspires others to experiment"
+      ],
+      growthAreas: [
+        "Finding balance between change and stability",
+        "Maintaining focus on long-term projects",
+        "Being patient with those who resist change"
+      ]
+    }
   },
   Sauerkraut: {
-    name: "Sauerkraut",
-    description: "You're reliable, sharp, and straightforward. Like this time-tested European staple, you have a distinctive character that adds clarity and zest to any situation. Your practical approach and consistent nature make you a trusted friend and advisor. You preserve what's important while cutting through life's complexity with refreshing directness.",
+    name: "The Steadfast Guardian",
+    pixelArt: "🥬",
+    description: "You possess the reliable strength and time-tested wisdom of Sauerkraut! Like this traditional ferment that has nourished generations, you represent the perfect balance of simplicity and complexity. Your straightforward nature, combined with your depth of character, makes you an invaluable presence in any group. Just as Sauerkraut preserves the harvest's bounty, you maintain and protect what's truly important in life.",
     characteristics: [
-      "Clear and direct communication",
-      "Strong sense of tradition",
-      "Reliable and consistent nature",
-      "Natural preservationist of wisdom"
+      "Rock-solid reliability in times of change",
+      "Preserver of valuable traditions and knowledge",
+      "Natural protector of community and family values",
+      "Creates lasting positive impact through consistent effort",
+      "Balances pragmatism with deep wisdom",
+      "Transforms simple ingredients into valuable resources",
+      "Maintains purity of purpose while adapting to change"
     ],
-    pixelArt: "🥬"
+    personalityInsights: {
+      strengths: [
+        "Your consistency creates a foundation others can rely on",
+        "You excel at preserving and improving what works",
+        "Your practical wisdom helps others find simple solutions"
+      ],
+      growthAreas: [
+        "Being more open to radical changes when necessary",
+        "Expressing your deeper feelings more openly",
+        "Taking more risks in pursuit of growth"
+      ]
+    }
   }
 };
 
-function Quiz() {  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState([]);
+const allCompatibility = {
+  Kimchi: {
+    bestMatch: "Kombucha",
+    bestDescription: "Your fiery passion and Kombucha's effervescent adaptability create an explosive combination! Together, you push boundaries and inspire innovation while maintaining deep respect for tradition. This pairing brings out the best in both personalities, creating a dynamic duo that can transform any situation into an opportunity for growth.",
+    worstMatch: "Sauerkraut",
+    worstDescription: "While you both share fermented wisdom, your bold, spicy energy might overwhelm Sauerkraut's measured approach. This pairing requires careful balance and mutual understanding to work effectively."
+  },
+  Miso: {
+    bestMatch: "Sauerkraut",
+    bestDescription: "A perfect blend of deep wisdom and steady reliability. Together, you create an environment of growth and stability that nurtures everyone around you. Your shared appreciation for tradition and patience makes this a powerfully grounding partnership.",
+    worstMatch: "Kombucha",
+    worstDescription: "Your contemplative depth might find Kombucha's constant evolution challenging. While you can learn from each other, this pairing requires extra effort to bridge the gap between stability and change."
+  },
+  Kombucha: {
+    bestMatch: "Kimchi",
+    bestDescription: "Your adaptable nature harmonizes beautifully with Kimchi's passionate energy! Together, you create an exciting atmosphere of innovation and transformation that inspires others. This dynamic pair brings out the best in each other's creative potential.",
+    worstMatch: "Miso",
+    worstDescription: "Your quick-changing nature might clash with Miso's patient, deeply rooted wisdom. Finding common ground requires slowing down and appreciating different approaches to growth."
+  },
+  Sauerkraut: {
+    bestMatch: "Miso",
+    bestDescription: "Your steady nature creates a perfect foundation for Miso's deep wisdom. Together, you form a partnership that combines practical reliability with profound insight, creating lasting positive impact on your community.",
+    worstMatch: "Kimchi",
+    worstDescription: "Your methodical approach might feel restricted by Kimchi's intense energy. Success in this pairing comes from finding balance between tradition and bold innovation."
+  }
+};
+
+
+function Quiz({ onReturnToStart }) {
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [answers, setAnswers] = useState(new Array(allQuestions.length).fill(null));
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState(null);
   const [fadeOut, setFadeOut] = useState(false);
@@ -187,10 +268,11 @@ function Quiz() {  const [currentQuestion, setCurrentQuestion] = useState(0);
   const handleAnswer = (selected) => {
     setFadeOut(true);
     setTimeout(() => {
-      const newAnswers = [...answers, selected];
+      const newAnswers = [...answers];
+      newAnswers[currentQuestion] = selected;
       setAnswers(newAnswers);
 
-      if (currentQuestion < questions.length - 1) {
+      if (currentQuestion < allQuestions.length - 1) {
         setCurrentQuestion(currentQuestion + 1);
       } else {
         calculateResult(newAnswers);
@@ -199,66 +281,67 @@ function Quiz() {  const [currentQuestion, setCurrentQuestion] = useState(0);
     }, 500);
   };
 
+  const handlePrevious = () => {
+    if (currentQuestion > 0) {
+      setFadeOut(true);
+      setTimeout(() => {
+        setCurrentQuestion(currentQuestion - 1);
+        setFadeOut(false);
+      }, 500);
+    }
+  };
+
   const calculateResult = (allAnswers) => {
     const typeCounts = allAnswers.reduce((acc, answer) => {
-      acc[answer] = (acc[answer] || 0) + 1;
+      if (answer) {
+        acc[answer] = (acc[answer] || 0) + 1;
+      }
       return acc;
     }, {});
 
-    const personality = Object.entries(typeCounts).reduce((a, b) => 
-      typeCounts[a] > typeCounts[b] ? a : b
-    )[0];
+    // Find the personality type with the most answers
+    let maxCount = 0;
+    let personality = null;
+    for (const type in typeCounts) {
+      if (typeCounts[type] > maxCount) {
+        maxCount = typeCounts[type];
+        personality = type;
+      }
+    }
+    // Handle ties by picking the first answer's type, or add more complex tie-breaking logic
+    if (!personality && allAnswers.length > 0) {
+      personality = allAnswers[0];
+    }
 
-    setResult(results[personality]);
+    setResult({
+      ...allResults[personality],
+      compatibility: allCompatibility[personality]
+    });
     setShowResult(true);
   };
 
   const restartQuiz = () => {
     setFadeOut(true);
     setTimeout(() => {
-      setCurrentQuestion(-1);
-      setAnswers([]);
+      setCurrentQuestion(0);
+      setAnswers(new Array(allQuestions.length).fill(null));
       setShowResult(false);
       setResult(null);
       setFadeOut(false);
+      onReturnToStart(); // Call the prop function to return to the landing page
     }, 500);
   };
-  if (currentQuestion === -1) {
-    return (
-      <div className={`quiz-container question ${fadeOut ? 'fade-out' : 'fade-in'}`}>
-        <div className="question-container">
-          <h2>Question {currentQuestion + 2}</h2>
-          <p>{questions[0].text}</p>
-        </div>
-        <div className="options-container">
-          {questions[0].options.map((option, index) => (
-            <button
-              key={index}
-              onClick={() => handleAnswer(option.type)}
-              className="option-button"
-            >
-              {option.text}
-            </button>
-          ))}
-        </div>
-        <div className="progress-bar">
-          <div 
-            className="progress"
-            style={{ width: `${(1 / questions.length) * 100}%` }}
-          ></div>
-        </div>
-      </div>
-    );
-  }
 
   if (showResult) {
-    return (      <div className={`quiz-container result ${fadeOut ? 'fade-out' : 'fade-in'}`}>
+    return (
+      <div className={`quiz-container result ${fadeOut ? 'fade-out' : 'fade-in'}`}>
         <div className="result-header">
           <div className="pixel-art">{result.pixelArt}</div>
           <h2 className="result-title">You are {result.name}!</h2>
         </div>
         <div className="result-content">
           <p className="result-description">{result.description}</p>
+
           <div className="characteristics">
             <h3>Your Key Traits:</h3>
             <ul className="trait-list">
@@ -269,51 +352,110 @@ function Quiz() {  const [currentQuestion, setCurrentQuestion] = useState(0);
               ))}
             </ul>
           </div>
+
+          {/* Only render personality insights if they exist in the result object */}
+          {result.personalityInsights && (
+            <div className="personality-insights">
+              <h3>Personal Growth Insights:</h3>
+              <div className="insights-container">
+                <div className="strengths">
+                  <h4>Your Natural Strengths</h4>
+                  <ul className="insight-list">
+                    {result.personalityInsights.strengths.map((strength, index) => (
+                      <li key={index} className="insight-item">
+                        <span className="insight-bullet">★</span> {strength}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="growth-areas">
+                  <h4>Growth Opportunities</h4>
+                  <ul className="insight-list">
+                    {result.personalityInsights.growthAreas.map((area, index) => (
+                      <li key={index} className="insight-item">
+                        <span className="insight-bullet">✧</span> {area}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
+
           <div className="compatibility-section">
             <h3>Fermentation Compatibility</h3>
             <div className="compatibility-container">
               <div className="compatibility best-match">
-                <h4>Best Match: {compatibility[result.name].bestMatch}</h4>
-                <p>{compatibility[result.name].bestDescription}</p>
-                <div className="match-icon">{results[compatibility[result.name].bestMatch].pixelArt}</div>
+                <h4>Best Match: {result.compatibility.bestMatch}</h4>
+                <p>{result.compatibility.bestDescription}</p>
+                <div className="match-icon">{allResults[result.compatibility.bestMatch].pixelArt}</div>
               </div>
               <div className="compatibility worst-match">
-                <h4>Challenging Match: {compatibility[result.name].worstMatch}</h4>
-                <p>{compatibility[result.name].worstDescription}</p>
-                <div className="match-icon">{results[compatibility[result.name].worstMatch].pixelArt}</div>
+                <h4>Challenging Match: {result.compatibility.worstMatch}</h4>
+                <p>{result.compatibility.worstDescription}</p>
+                <div className="match-icon">{allResults[result.compatibility.worstMatch].pixelArt}</div>
               </div>
             </div>
           </div>
         </div>
-        <button onClick={restartQuiz} className="restart-button pixel-button">
-          Take Quiz Again
-        </button>
+        <div className="result-buttons">
+          <button
+            onClick={restartQuiz}
+            className="restart-button pixel-button"
+          >
+            Take Quiz Again
+          </button>
+        </div>
       </div>
     );
   }
 
   return (
     <div className={`quiz-container question ${fadeOut ? 'fade-out' : 'fade-in'}`}>
+      <div className="quiz-header">
+        <div className="progress-container">
+          <div className="progress-bar">
+            <div
+              className="progress"
+              style={{ width: `${((currentQuestion + 1) / allQuestions.length) * 100}%` }}
+            ></div>
+          </div>
+          <p className="progress-text">Question {currentQuestion + 1} of {allQuestions.length}</p>
+        </div>
+
+        <div className="question-dots">
+          {Array(allQuestions.length).fill(0).map((_, index) => (
+            <span
+              key={index}
+              className={`question-dot ${index === currentQuestion ? 'active' : ''} ${answers[index] ? 'answered' : ''}`}
+            />
+          ))}
+        </div>
+      </div>
+
       <div className="question-container">
-        <h2>Question {currentQuestion + 1}</h2>
-        <p>{questions[currentQuestion].text}</p>
+        <h2>{allQuestions[currentQuestion].text}</h2>
+        <div className="options-container">
+          {allQuestions[currentQuestion].options.map((option, index) => (
+            <button
+              key={index}
+              onClick={() => handleAnswer(option.type)}
+              className={`option-button ${answers[currentQuestion] === option.type ? 'selected' : ''}`}
+            >
+              {option.text}
+            </button>
+          ))}
+        </div>
       </div>
-      <div className="options-container">
-        {questions[currentQuestion].options.map((option, index) => (
-          <button
-            key={index}
-            onClick={() => handleAnswer(option.type)}
-            className="option-button"
-          >
-            {option.text}
-          </button>
-        ))}
-      </div>
-      <div className="progress-bar">
-        <div 
-          className="progress"
-          style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
-        ></div>
+
+      <div className="navigation-buttons">
+        <button
+          onClick={handlePrevious}
+          className={`nav-button previous ${currentQuestion === 0 ? 'disabled' : ''}`}
+          disabled={currentQuestion === 0}
+        >
+          <span className="nav-icon">←</span> Previous
+        </button>
       </div>
     </div>
   );
