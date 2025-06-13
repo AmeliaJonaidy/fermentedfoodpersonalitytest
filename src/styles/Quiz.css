@@ -678,97 +678,140 @@ footer {
     transform: translateY(0); /* Reset transform */
 }
 
-/* Mobile-optimized typography and spacing */
-@media screen and (max-width: 480px) {
-  .quiz-container {
-    padding: 1rem;
+/* Mobile responsiveness for quiz results */
+@media screen and (max-width: 768px) {
+  .quiz-container.result {
+    padding: 1.5rem;
+    margin: 1rem;
   }
 
-  .quiz-question {
-    font-size: 18px;
+  .result-header {
+    margin-bottom: 2rem;
+  }
+
+  .pixel-art {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+  }
+
+  .result-title {
+    font-size: 1.8rem;
+    text-shadow: 3px 3px 0 #fff, 6px 6px 0 #f1c40f;
+  }
+
+  .result-content {
+    padding: 1.5rem;
+    box-shadow: 4px 4px 0 #7f8c8d, 8px 8px 0 rgba(0,0,0,0.15);
+  }
+
+  .result-description {
+    font-size: 1rem;
     line-height: 1.6;
+  }
+
+  .characteristics h3,
+  .personality-insights h3,
+  .compatibility-section h3 {
+    font-size: 1.2rem;
     margin-bottom: 1.5rem;
-    letter-spacing: 0.3px;
+    padding-bottom: 8px;
   }
 
-  .quiz-options {
-    gap: 12px;
+  .trait-list,
+  .insight-list {
+    padding: 0;
   }
 
-  .quiz-option {
-    padding: 12px 16px;
-    min-height: 44px; /* Minimum touch target size */
-    font-size: 16px;
-    line-height: 1.4;
+  .trait-item,
+  .insight-item {
+    padding: 0.8rem;
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
   }
 
-  /* Improve readability of pixel fonts on mobile */
-  [class*="pixel-font"] {
-    letter-spacing: 0.5px;
-    word-spacing: 1px;
+  .trait-bullet,
+  .insight-bullet {
+    font-size: 1.1rem;
+    margin-right: 0.8rem;
   }
 
-  /* Ensure sufficient spacing between interactive elements */
-  button, 
-  .clickable {
-    margin: 8px 0;
-    padding: 12px 20px;
-    min-height: 44px;
-  }
-}
-
-/* Prevent text from becoming too small */
-@media screen and (max-width: 320px) {
-  .quiz-question {
-    font-size: 16px;
+  .insights-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
-  .quiz-option {
-    font-size: 15px;
-    padding: 10px 14px;
+  .strengths,
+  .growth-areas {
+    padding: 1.2rem;
   }
-}
 
-/* --- Progress Bar --- */
-.progress-bar {
-    width: 80%;
-    height: 35px; /* Taller bar */
-    background: #bdc3c7; /* Base color */
-    border: 5px solid #2c3e50; /* Thicker, darker border */
-    border-radius: 18px; /* More rounded caps */
-    overflow: hidden;
-    position: relative;
-    margin: 2.5rem auto; /* Adjusted margin */
-    box-shadow: 4px 4px 0 #7f8c8d; /* Pixel shadow for the bar */
-}
+  .compatibility-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 
-.progress {
-    height: 100%;
-    background: linear-gradient(90deg, #2ecc71 0%, #27ae60 100%);
-    transition: width 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition */
-    position: relative;
-    overflow: hidden;
-}
+  .compatibility {
+    padding: 1.5rem;
+  }
 
-.progress::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
+  .compatibility h4 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .compatibility p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .match-icon {
+    font-size: 2.5em;
+    margin-top: 1rem;
+  }
+
+  .result-buttons {
+    margin-top: 2rem;
+    gap: 1rem;
+  }
+
+  .return-button,
+  .restart-button {
     width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        rgba(255,255,255,0) 0%,
-        rgba(255,255,255,0.4) 50%, /* More visible shine */
-        rgba(255,255,255,0) 100%
-    );
-    animation: shineEffect 2.5s infinite; /* Renamed to avoid conflict */
+    font-size: 0.9rem;
+    padding: 1rem 1.5rem;
+  }
 }
 
-@keyframes shineEffect {
-    0% { transform: translateX(-120%); }
-    100% { transform: translateX(120%); }
+/* Additional optimizations for very small screens */
+@media screen and (max-width: 320px) {
+  .quiz-container.result {
+    padding: 1rem;
+    margin: 0.5rem;
+  }
+
+  .result-title {
+    font-size: 1.5rem;
+  }
+
+  .pixel-art {
+    font-size: 3.5rem;
+  }
+
+  .result-description {
+    font-size: 0.9rem;
+  }
+
+  .trait-item,
+  .insight-item,
+  .compatibility p {
+    font-size: 0.9rem;
+  }
+
+  .return-button,
+  .restart-button {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.8rem;
+  }
 }
 
 /* --- Quiz Result Page --- */
