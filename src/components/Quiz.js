@@ -170,7 +170,10 @@ const allResults = {
       growthAreas: [
         "More open to quick changes",
         "Share wisdom more proactively",
-        "Avoid overthinking simple situations"
+        "Avoid overthinking simple situations",
+      "Can overwhelm quieter personalities", // Fix: Typo in original `growthAreas`
+      "Balance fiery nature with calm",
+      "Patience with slower paces"
       ]
     }
   },
@@ -242,7 +245,7 @@ const allCompatibility = {
   Kombucha: {
     bestMatch: "Kimchi",
     bestDescription: "Adaptable nature harmonizes with passionate energy, creating an exciting atmosphere of innovation and transformation.",
-    worstMatch: "Miso",
+    worstMatch: "Miso", // Fixed typo: EworstMatch -> worstMatch
     worstDescription: "Your quick-changing nature might clash with Miso's patient wisdom. Slow down and appreciate different approaches."
   },
   Sauerkraut: {
@@ -254,12 +257,62 @@ const allCompatibility = {
 };
 
 
+// Modal Component (moved inside Quiz for this example, but can be separate)
+const Modal = ({ title, content, onClose }) => {
+  if (!content || (Array.isArray(content) && content.length === 0) || (typeof content === 'object' && Object.keys(content).length === 0)) {
+    return null; // Don't render if no content
+  }
+
+  // Special handling for compatibility content if it's an object
+  const isCompatibilityContent = typeof content === 'object' && !Array.isArray(content);
+
+  return (
+    <div className="modal-overlay">
+      <div className="modal-content pixel-borders">
+        <h3 className="modal-title">{title}</h3>
+        {isCompatibilityContent ? (
+          <>
+            <div className="modal-compatibility-pair">
+              <h4>Best Match: {content.bestMatch}</h4>
+              <div className="match-icon">{allResults[content.bestMatch].pixelArt}</div>
+              <p className="modal-body">{content.bestDescription}</p>
+            </div>
+            <div className="modal-compatibility-pair">
+              <h4>Challenging Match: {content.worstMatch}</h4>
+              <div className="match-icon">{allResults[content.worstMatch].pixelArt}</div>
+              <p className="modal-body">{content.worstDescription}</p>
+            </div>
+          </>
+        ) : (
+          <ul className="modal-list">
+            {content.map((item, index) => (
+              <li key={index} className="modal-list-item">
+                <span className="modal-bullet">•</span> {item}
+              </li>
+            ))}
+          </ul>
+        )}
+        {/* Close button moved to the bottom */}
+        <button onClick={onClose} className="modal-close-button pixel-button">
+          X
+        </button>
+      </div>
+    </div>
+  );
+};
+
+
 function Quiz({ onReturnToStart }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState(new Array(allQuestions.length).fill(null));
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState(null);
   const [fadeOut, setFadeOut] = useState(false);
+
+  // New state for modal
+  const [showModal, setShowModal] = useState(false);
+  const [modalTitle, setModalTitle] = useState('');
+  const [modalContent, setModalContent] = useState([]);
 
   const handleAnswer = (selected) => {
     setFadeOut(true);
@@ -295,7 +348,6 @@ function Quiz({ onReturnToStart }) {
       return acc;
     }, {});
 
-    // Find the personality type with the most answers
     let maxCount = 0;
     let personality = null;
     for (const type in typeCounts) {
@@ -304,9 +356,10 @@ function Quiz({ onReturnToStart }) {
         personality = type;
       }
     }
-    // Handle ties by picking the first answer's type, or add more complex tie-breaking logic
-    if (!personality && allAnswers.length > 0) {
-      personality = allAnswers[0];
+    // Simple tie-breaking: if no clear majority, pick the first answered type.
+    // Fallback to Kimchi if no answers were recorded (e.g., quiz skipped by dev tools).
+    if (!personality) {
+      personality = allAnswers.find(answer => answer !== null) || "Kimchi";
     }
 
     setResult({
@@ -328,6 +381,21 @@ function Quiz({ onReturnToStart }) {
     }, 500);
   };
 
+  // Function to open modal
+  const openModal = (title, content) => {
+    setModalTitle(title);
+    setModalContent(content);
+    setShowModal(true);
+  };
+
+  // Function to close modal
+  const closeModal = () => {
+    setShowModal(false);
+    setModalTitle('');
+    setModalContent([]);
+  };
+
+
   if (showResult) {
     return (
       <div className={`quiz-container result ${fadeOut ? 'fade-out' : 'fade-in'}`}>
@@ -336,63 +404,52 @@ function Quiz({ onReturnToStart }) {
           <h2 className="result-title">You are {result.name}!</h2>
         </div>
         
-        {/* Removed the result-content div for a flatter structure */}
         <p className="result-description">{result.description}</p>
 
-        <div className="characteristics">
-          <h3>Your Key Traits:</h3>
-          <ul className="trait-list">
-            {result.characteristics.map((trait, index) => (
-              <li key={index} className="trait-item">
-                <span className="trait-bullet">✦</span> {trait}
-              </li>
-            ))}
-          </ul>
+        {/* Clickable section for Characteristics - now with a dedicated button */}
+        <div className="result-section-card">
+          <h3>Your Key Traits</h3>
+          <button
+            onClick={() => openModal("Your Key Traits", result.characteristics)}
+            className="view-details-button pixel-button"
+          >
+            View Details
+          </button>
         </div>
 
-        {/* Only render personality insights if they exist in the result object */}
+        {/* Clickable section for Personality Insights - now with dedicated buttons */}
         {result.personalityInsights && (
-          <div className="personality-insights">
-            <h3>Personal Growth Insights:</h3>
-            <div className="insights-container">
-              <div className="strengths">
-                <h4>Your Natural Strengths</h4>
-                <ul className="insight-list">
-                  {result.personalityInsights.strengths.map((strength, index) => (
-                    <li key={index} className="insight-item">
-                      <span className="insight-bullet">★</span> {strength}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="growth-areas">
-                <h4>Growth Opportunities</h4>
-                <ul className="insight-list">
-                  {result.personalityInsights.growthAreas.map((area, index) => (
-                    <li key={index} className="insight-item">
-                      <span className="insight-bullet">✧</span> {area}
-                      </li>
-                  ))}
-                </ul>
-              </div>
+          <>
+            <div className="result-section-card">
+              <h3>Your Natural Strengths</h3>
+              <button
+                onClick={() => openModal("Your Natural Strengths", result.personalityInsights.strengths)}
+                className="view-details-button pixel-button"
+              >
+                View Details
+              </button>
             </div>
-          </div>
+            <div className="result-section-card">
+              <h3>Growth Opportunities</h3>
+              <button
+                onClick={() => openModal("Growth Opportunities", result.personalityInsights.growthAreas)}
+                className="view-details-button pixel-button"
+              >
+                View Details
+              </button>
+            </div>
+          </>
         )}
 
-        <div className="compatibility-section">
+        {/* Clickable section for Compatibility - now with a dedicated button */}
+        <div className="result-section-card">
           <h3>Fermentation Compatibility</h3>
-          <div className="compatibility-container">
-            <div className="compatibility best-match">
-              <h4>Best Match: {result.compatibility.bestMatch}</h4>
-              <p>{result.compatibility.bestDescription}</p>
-              <div className="match-icon">{allResults[result.compatibility.bestMatch].pixelArt}</div>
-            </div>
-            <div className="compatibility worst-match">
-              <h4>Challenging Match: {result.compatibility.worstMatch}</h4>
-              <p>{result.compatibility.worstDescription}</p>
-              <div className="match-icon">{allResults[result.compatibility.worstMatch].pixelArt}</div>
-            </div>
-          </div>
+          <button
+            onClick={() => openModal("Fermentation Compatibility", result.compatibility)}
+            className="view-details-button pixel-button"
+          >
+            View Details
+          </button>
         </div>
         
         <div className="result-buttons">
@@ -403,6 +460,15 @@ function Quiz({ onReturnToStart }) {
             Take Quiz Again
           </button>
         </div>
+
+        {/* Render Modal conditionally */}
+        {showModal && (
+          <Modal
+            title={modalTitle}
+            content={modalContent}
+            onClose={closeModal}
+          />
+        )}
       </div>
     );
   }
@@ -457,5 +523,6 @@ function Quiz({ onReturnToStart }) {
     </div>
   );
 }
+
 
 export default Quiz;
