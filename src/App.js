@@ -10,7 +10,6 @@ function Modal({ isOpen, onClose, title, content, icon }) {
   return (
     <div className="modal-overlay"> {/* This will cover the entire screen */}
       <div className="modal-content"> {/* The actual modal box */}
-        <button className="modal-close-button" onClick={onClose}>×</button> {/* Close button */}
         <div className="modal-header">
           <div className="modal-icon">{icon}</div> {/* Display the emoji icon */}
           <h2 className="modal-title">{title}</h2> {/* Modal title */}
