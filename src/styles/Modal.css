@@ -44,7 +44,7 @@
 }
 
 .modal-header h2 {
-  font-family: 'Press Start 2P', cursive;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   font-size: 1.5rem;
   color: #2c3e50;
   margin: 0;
@@ -137,4 +137,14 @@
 .modal-content select,
 .modal-content textarea {
   font-size: 16px;
+}
+
+/* Apply system fonts to all modal elements */
+.modal-header h2,
+.modal-title,
+.modal-close-button,
+.modal-button {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
