@@ -720,225 +720,997 @@ footer {
         0 4px 8px rgba(0,0,0,0.2);
 }
 
-
-/* --- Pixel Art Header (Jar) --- */
-.pixel-art-header {
-    margin-bottom: 4rem;
-    transform-style: preserve-3d;
-    perspective: 1200px;
+.option-button.selected {
+    background-color: #56a861; /* Green when selected */
+    border-color: #56a861;
+    color: white;
+    box-shadow: 6px 6px 0 #56a861; /* Green shadow */
+    transform: translateY(0); /* Reset transform */
 }
 
-.pixel-jar-large {
-    width: 220px;
-    height: 270px;
-    position: relative;
-    margin: 0 auto;
-    transform: rotateY(15deg);
-    transition: transform 0.4s ease-out;
+/* Mobile responsiveness for quiz results */
+@media screen and (max-width: 768px) {
+  .quiz-container.result {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  .result-header {
+    margin-bottom: 2rem;
+  }
+
+  .pixel-art {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+  }
+
+  .result-title {
+    font-size: 1.8rem;
+    text-shadow: 3px 3px 0 #fff, 6px 6px 0 #f1c40f;
+  }
+
+  .result-content {
+    padding: 1.5rem;
+    box-shadow: 4px 4px 0 #7f8c8d, 8px 8px 0 rgba(0,0,0,0.15);
+  }
+
+  .result-description {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .characteristics h3,
+  .personality-insights h3,
+  .compatibility-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 8px;
+  }
+
+  .trait-list,
+  .insight-list {
+    padding: 0;
+  }
+
+  .trait-item,
+  .insight-item {
+    padding: 0.8rem;
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .trait-bullet,
+  .insight-bullet {
+    font-size: 1.1rem;
+    margin-right: 0.8rem;
+  }
+
+  .insights-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .strengths,
+  .growth-areas {
+    padding: 1.2rem;
+  }
+
+  .compatibility-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .compatibility {
+    padding: 1.5rem;
+  }
+
+  .compatibility h4 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .compatibility p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .match-icon {
+    font-size: 2.5em;
+    margin-top: 1rem;
+  }
+
+  .result-buttons {
+    margin-top: 2rem;
+    gap: 1rem;
+  }
+
+  .return-button,
+  .restart-button {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 1rem 1.5rem;
+  }
+}
+
+/* Additional optimizations for very small screens */
+@media screen and (max-width: 320px) {
+  .quiz-container.result {
+    padding: 1rem;
+    margin: 0.5rem;
+  }
+
+  .result-title {
+    font-size: 1.5rem;
+  }
+
+  .pixel-art {
+    font-size: 3.5rem;
+  }
+
+  .result-description {
+    font-size: 0.9rem;
+  }
+
+  .trait-item,
+  .insight-item,
+  .compatibility p {
+    font-size: 0.9rem;
+  }
+
+  .return-button,
+  .restart-button {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* --- Quiz Result Page --- */
+.quiz-container.result {
+    background: linear-gradient(135deg, #a7e9af 0%, #76d7c4 100%); /* Softer, pleasing background */
+    animation: gradientBG 15s ease infinite; /* Keep the gradient animation */
+    padding: 3rem;
+    border: 6px solid #1abc9c; /* Green pixel border for results */
+    box-shadow:
+        8px 8px 0 #16a085,
+        16px 16px 0 rgba(0,0,0,0.2);
+}
+
+.result-header {
+    margin-bottom: 3rem;
+}
+
+.pixel-art {
+    font-size: 5.5rem; /* Larger icon */
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(5px 5px 0 rgba(0,0,0,0.2)); /* Stronger shadow */
+    animation: resultFloat 3s ease-in-out infinite; /* Specific float for result icon */
+}
+
+@keyframes resultFloat {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+.result-title {
+    font-family: 'Press Start 2P';
+    font-size: 2.8rem; /* Larger title */
+    color: #2c3e50;
+    margin-bottom: 2.5rem;
+    text-shadow:
+        4px 4px 0 #fff, /* White pixel outline */
+        8px 8px 0 #f1c40f; /* Yellow pixel shadow */
+    line-height: 1.2;
+    -webkit-font-smoothing: none;
     image-rendering: pixelated;
 }
 
-.pixel-jar-large:hover {
-    transform: translateY(-10px) rotateY(15deg) rotateX(5deg);
-}
-
-.pixel-lid {
-    width: 85%;
-    height: 60px;
-    background: #4a4a4a;
-    border: 8px solid #222;
-    border-radius: 15px 15px 0 0;
-    position: absolute;
-    top: -10px;
-    left: 7.5%;
-    z-index: 2;
-    box-shadow: inset 0 -15px 20px rgba(0,0,0,0.3);
-}
-
-.pixel-body {
-    width: 100%;
-    height: 220px;
-    background: rgba(255, 255, 255, 0.95);
-    border: 8px solid #222;
-    border-radius: 15px;
-    position: absolute;
-    bottom: 0;
-    overflow: hidden;
+.result-content {
+    max-width: 850px; /* Wider content */
+    margin: 0 auto;
+    padding: 3rem; /* More padding */
+    background: #ffffff; /* Solid white background */
+    border-radius: 12px;
+    border: 5px solid #2c3e50; /* Stronger dark border */
     box-shadow:
-        inset 0 0 40px rgba(255,255,255,0.6),
-        0 15px 25px rgba(0,0,0,0.3);
+        6px 6px 0 #7f8c8d,
+        12px 12px 0 rgba(0,0,0,0.15);
+    box-sizing: border-box;
 }
 
-.pixel-veggies {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 70%;
+.result-description {
+    font-size: 1.2rem; /* Larger description */
+    line-height: 1.8;
+    color: #2c3e50;
+    margin-bottom: 2.5rem;
+    text-align: left;
+    text-shadow: 1px 1px 0 rgba(255,255,255,0.7);
+}
+
+.characteristics {
+    text-align: left;
+    margin-top: 2.5rem;
+}
+
+.characteristics h3 {
+    font-family: 'Press Start 2P';
+    font-size: 1.4rem; /* Larger heading */
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    border-bottom: 3px dashed #bdc3c7; /* Dashed separator */
+    padding-bottom: 10px;
+    text-shadow: 2px 2px 0 #fff;
+    -webkit-font-smoothing: none;
+    image-rendering: pixelated;
+}
+
+.trait-list {
+    list-style: none;
+    padding: 0;
+}
+
+.trait-item {
     display: flex;
-    justify-content: space-around;
-    align-items: flex-end;
+    align-items: flex-start; /* Align bullet to top of text */
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: #34495e;
+    padding: 0.8rem 1rem; /* More padding */
+    background: #f8f9fa; /* Off-white background */
+    border-radius: 6px;
+    transition: transform 0.2s ease, background 0.2s ease;
+    border: 2px solid #e0e6e9; /* Subtle border */
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.05); /* Subtle pixel shadow */
 }
 
-.veggie {
-    position: absolute;
-    bottom: 15px;
-    width: 40px;
-    height: 70px;
-    background: linear-gradient(45deg, #4CAF50, #66BB6A);
-    border-radius: 8px;
-    animation: floatVeggies 4s ease-in-out infinite;
-    box-shadow: inset 0 -5px 5px rgba(0,0,0,0.2);
+.trait-item:hover {
+    transform: translateX(10px);
+    background: #e9ecef; /* Slightly darker on hover */
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.1); /* More pronounced shadow */
 }
 
-.veggie.v1 { left: 15%; animation-delay: -0.3s; height: 80px; background: linear-gradient(45deg, #FFC107, #FFD54F); }
-.veggie.v2 { left: 45%; animation-delay: -0.6s; height: 65px; background: linear-gradient(45deg, #E91E63, #F06292); }
-.veggie.v3 { left: 75%; animation-delay: -0.9s; height: 75px; background: linear-gradient(45deg, #2196F3, #64B5F6); }
-
-@keyframes floatVeggies {
-    0%, 100% { transform: translateY(0) scaleY(1); }
-    50% { transform: translateY(-8px) scaleY(1.05); }
+.trait-bullet {
+    color: #2ecc71; /* Green checkmark */
+    margin-right: 1.2rem; /* More space */
+    font-size: 1.4rem; /* Larger bullet */
+    line-height: 1;
+    text-shadow: 1px 1px 0 #000;
 }
 
-.pixel-bubbles {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: hidden;
+.question {
+    animation: slideIn 0.5s ease-out forwards;
 }
 
-.bubble {
-    position: absolute;
-    background: rgba(255, 255, 255, 0.7);
-    border-radius: 50%;
-    animation: rise 10s infinite ease-in-out;
-    opacity: 0;
-    box-shadow: 0 0 5px rgba(255,255,255,0.5);
-}
-
-.bubble.b1 { left: 20%; width: 25px; height: 25px; animation-delay: 0s; }
-.bubble.b2 { left: 50%; width: 18px; height: 18px; animation-delay: 3s; }
-.bubble.b3 { left: 80%; width: 30px; height: 30px; animation-delay: 6s; }
-
-@keyframes rise {
-    0% {
-        bottom: -50px;
+@keyframes slideIn {
+    from {
         opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
         transform: translateX(0);
     }
-    10% { opacity: 0.5; }
-    50% {
-        opacity: 0.9;
-        transform: translateX(25px);
-    }
-    90% { opacity: 0.5; }
-    100% {
-        bottom: 110%;
-        opacity: 0;
-        transform: translateX(-25px);
-    }
 }
 
-/* Specific pulse for the start button */
-.pulsing {
-    animation: buttonPulse 2s infinite; /* Renamed to avoid conflict with other 'pulse' */
+/* --- Compatibility Section --- */
+.compatibility-section {
+    margin-top: 3.5rem;
+    text-align: left;
 }
 
-@keyframes buttonPulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.4);
-    }
-    70% {
-        box-shadow: 0 0 0 20px rgba(52, 152, 219, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
-    }
+.compatibility-section h3 {
+    font-family: 'Press Start 2P';
+    font-size: 1.4rem;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    text-align: center;
+    border-bottom: 3px dashed #bdc3c7;
+    padding-bottom: 10px;
+    text-shadow: 2px 2px 0 #fff;
+    -webkit-font-smoothing: none;
+    image-rendering: pixelated;
 }
 
-/* --- Responsive Media Queries --- */
-@media screen and (max-width: 768px) {
-    .quiz-container,
-    .quiz-container.result {
-        margin: 1rem;
-        padding: 1.5rem;
+.compatibility-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Slightly larger min-width */
+    gap: 2.5rem; /* More gap */
+    margin-top: 2rem;
+}
+
+.compatibility {
+    padding: 2rem; /* More padding */
+    border-radius: 12px;
+    border: 5px solid #2c3e50; /* Stronger pixel border */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 4px 4px 0 #7f8c8d; /* Pixel shadow */
+    background: #f8f9fa; /* Default neutral background */
+}
+
+.compatibility::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        rgba(255,255,255,0.2) 0%, /* More visible shine */
+        rgba(255,255,255,0) 100%
+    );
+    z-index: 1;
+}
+
+.best-match {
+    border-color: #2ecc71; /* Green border */
+    background: #e8f9e6; /* Light green background */
+    box-shadow:
+        4px 4px 0 #1abc9c,
+        8px 8px 0 rgba(0,0,0,0.1); /* Stronger specific shadow */
+}
+
+.worst-match {
+    border-color: #e74c3c; /* Red border */
+    background: #ffe0db; /* Light red background */
+    box-shadow:
+        4px 4px 0 #c0392b,
+        8px 8px 0 rgba(0,0,0,0.1); /* Stronger specific shadow */
+}
+
+.compatibility:hover {
+    transform: translateY(-8px); /* More pronounced lift */
+    box-shadow:
+        8px 8px 0 rgba(0,0,0,0.1),
+        16px 16px 0 rgba(0,0,0,0.25); /* Deeper shadow on hover */
+}
+
+.compatibility.best-match:hover {
+    box-shadow:
+        8px 8px 0 #1abc9c,
+        16px 16px 0 rgba(0,0,0,0.25);
+}
+
+.compatibility.worst-match:hover {
+    box-shadow:
+        8px 8px 0 #c0392b,
+        16px 16px 0 rgba(0,0,0,0.25);
+}
+
+
+.compatibility h4 {
+    font-family: 'Press Start 2P';
+    font-size: 1.1rem; /* Consistent size */
+    color: #2c3e50;
+    margin-bottom: 1.2rem;
+    text-shadow: 1px 1px 0 #fff;
+    -webkit-font-smoothing: none;
+    image-rendering: pixelated;
+}
+
+.compatibility p {
+    font-size: 1.05rem; /* Slightly larger */
+    line-height: 1.7;
+    color: #34495e;
+    margin-bottom: 1.8rem;
+}
+
+.match-icon {
+    font-size: 3em; /* Larger icon */
+    text-align: center;
+    margin-top: 1.2rem;
+    filter: drop-shadow(3px 3px 0 rgba(0,0,0,0.15)); /* Stronger shadow */
+    animation: matchIconFloat 3s ease-in-out infinite; /* Specific float for match icon */
+}
+
+@keyframes matchIconFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+/* --- Personality Insights --- */
+.personality-insights {
+    margin-top: 3.5rem;
+    padding: 2.5rem; /* More padding */
+    background: #ecf0f1; /* Light background for insights section */
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+    border: 4px solid #7f8c8d; /* Subtle pixel border */
+    box-sizing: border-box;
+}
+
+.personality-insights h3 {
+    font-family: 'Press Start 2P';
+    font-size: 1.4rem;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    text-align: center;
+    border-bottom: 3px dashed #bdc3c7;
+    padding-bottom: 10px;
+    text-shadow: 2px 2px 0 #fff;
+    -webkit-font-smoothing: none;
+    image-rendering: pixelated;
+}
+
+.insights-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem; /* More gap */
+}
+
+.strengths,
+.growth-areas {
+    padding: 1.8rem; /* More padding */
+    border-radius: 12px;
+    background: #ffffff; /* White background for individual insight boxes */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.1); /* Subtle pixel shadow */
+}
+
+.strengths {
+    border-left: 6px solid #2ecc71; /* Thicker, vibrant left border */
+}
+
+.growth-areas {
+    border-left: 6px solid #f1c40f; /* Yellow for growth areas */
+}
+
+.strengths:hover,
+.growth-areas:hover {
+    transform: translateY(-5px);
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.15); /* More pronounced shadow on hover */
+}
+
+.strengths h4,
+.growth-areas h4 {
+    font-family: 'Press Start 2P';
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+    border-bottom: 2px dashed #bdc3c7;
+    padding-bottom: 8px;
+    text-shadow: 1px 1px 0 #fff;
+    -webkit-font-smoothing: none;
+    image-rendering: pixelated;
+}
+
+.insight-list {
+    list-style: none;
+    padding: 0;
+}
+
+.insight-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    background: #f8f9fa; /* Light background for list items */
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    border: 1px solid #e0e6e9; /* Light border */
+    box-shadow: 1px 1px 0 rgba(0,0,0,0.05); /* Very subtle shadow */
+}
+
+.insight-item:hover {
+    background: #e9ecef; /* Slightly darker on hover */
+    transform: translateX(5px);
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.1); /* More visible shadow */
+}
+
+.insight-bullet {
+    margin-right: 1rem;
+    font-size: 1.3rem; /* Larger bullet */
+    line-height: 1;
+    text-shadow: 1px 1px 0 #000;
+}
+
+.strengths .insight-bullet {
+    color: #2ecc71;
+}
+
+.growth-areas .insight-bullet {
+    color: #f1c40f; /* Yellow bullet for growth areas */
+}
+
+/* Result Buttons */
+.result-buttons {
+    margin-top: 3.5rem;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.return-button, .restart-button {
+    font-family: 'Press Start 2P';
+    font-size: 1.2rem;
+    padding: 1.5rem 2.8rem; /* More padding */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    box-shadow:
+        0 6px 0 #27ae60,
+        0 8px 10px rgba(0,0,0,0.2);
+    -webkit-font-smoothing: none;
+    image-rendering: pixelated;
+    color: white; /* Ensure text is white */
+}
+
+.return-button {
+    background-color: #3498db; /* Blue button */
+    box-shadow: 0 6px 0 #2980b9, 0 8px 10px rgba(0,0,0,0.2);
+}
+
+.return-button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 0 #2980b9, 0 10px 12px rgba(0,0,0,0.2);
+}
+
+.restart-button {
+    background-color: #e67e22; /* Orange button */
+    box-shadow: 0 6px 0 #d35400, 0 8px 10px rgba(0,0,0,0.2);
+}
+
+.restart-button:hover {
+    background-color: #d35400;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 0 #d35400, 0 10px 12px rgba(0,0,0,0.2);
+}
+
+/* --- Modal Overlay --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); /* Even darker overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    backdrop-filter: blur(10px); /* Stronger blur */
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* --- Modal Content Box --- */
+.modal-content {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 40px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px; /* Wider max width */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); /* Stronger, deeper shadow */
+    position: relative;
+    border: 5px solid #1abc9c; /* Thicker pixel border */
+    box-sizing: border-box;
+
+    border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><rect x="0" y="0" width="24" height="24" fill="transparent" stroke="%231abc9c" stroke-width="4" stroke-dasharray="4 4"/></svg>') 4 stretch; /* Larger pixel dash for border */
+    -webkit-font-smoothing: none;
+    image-rendering: pixelated;
+    animation: pop-in 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards; /* Pop-in animation */
+}
+
+/* --- Modal Header --- */
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px; /* More space */
+    border-bottom: 4px dashed #34495e; /* Thicker dashed separator */
+    padding-bottom: 20px;
+}
+
+.modal-icon {
+    font-size: 4em; /* Even larger icon */
+    margin-right: 25px;
+    text-shadow: 4px 4px #000; /* Stronger pixel shadow */
+}
+
+.modal-title {
+    font-size: 1.9rem; /* Larger title */
+    margin: 0;
+    color: #f1c40f;
+    font-family: 'Press Start 2P';
+    text-shadow: 4px 4px #c0392b; /* Stronger pixel shadow */
+    line-height: 1.2;
+}
+
+/* --- Modal Body --- */
+.modal-body {
+    font-size: 1.3em; /* Larger body text */
+    line-height: 1.8;
+    margin-bottom: 35px; /* More space */
+    font-family: sans-serif;
+    color: #ecf0f1;
+    text-shadow: 1px 1px #000;
+}
+
+/* --- Modal Footer --- */
+.modal-footer {
+    text-align: center;
+    border-top: 4px dashed #34495e;
+    padding-top: 25px;
+}
+
+/* --- Close Button (top right) --- */
+.modal-close-button {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: none;
+    border: none;
+    font-size: 2.2em;
+    color: #e74c3c;
+    cursor: pointer;
+    padding: 10px 15px;
+    font-family: 'Press Start 2P';
+    text-shadow: 2px 2px #000;
+    transition: color 0.2s ease, transform 0.1s ease;
+}
+
+.modal-close-button:hover {
+    color: #c0392b;
+    transform: scale(1.2) rotate(5deg); /* More dynamic hover */
+}
+
+/* --- Modal Button (in footer) --- */
+.modal-button {
+    background-color: #1abc9c;
+    color: #fff;
+    border: none;
+    padding: 18px 35px; /* Larger padding */
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-family: 'Press Start 2P';
+    text-shadow: 2px 2px #000;
+    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+    box-shadow: 6px 6px 0px 0px #16a085; /* Stronger pixel shadow */
+}
+
+.modal-button:hover {
+    background-color: #16a085;
+    transform: translateY(3px); /* More pronounced press effect */
+    box-shadow: 3px 3px 0px 0px #16a085;
+}
+
+.modal-button:active {
+    transform: translateY(6px);
+    box-shadow: 0px 0px 0px 0px #16a085;
+}
+
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    /* --- Aggressive Mobile Layout Adjustments for Main Content Area --- */
+    main {
+        max-width: 100%; /* Override default max-width to fill the screen */
+        padding: 0 1rem; /* Add consistent horizontal padding for smaller screens */
+        width: 100%; /* Ensure main stretches fully */
         box-sizing: border-box;
-        max-width: 100%;
-        width: 100%;
     }
 
-    .quiz-title {
-        font-size: 1.8rem;
-        margin-bottom: 1.5rem;
-        text-shadow: 3px 3px 0 #fff, 6px 6px 0 #f1c40f;
+    .landing-page {
+        padding: 1.5rem;
+        width: 100%; /* Ensure it fills main's width */
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    .title {
+        font-size: 2.2rem;
+        text-shadow: 3px 3px 0 #fff, 6px 6px 0 rgba(0,0,0,0.1);
+        word-break: break-word; /* Ensure title text wraps if long */
+    }
+    .subtitle {
+        font-size: 1rem;
         word-break: break-word;
     }
+    .intro-description p {
+        font-size: 1rem;
+        word-break: break-word;
+    }
+    .ferment-types {
+        grid-template-columns: 1fr; /* Stack on small screens */
+        gap: 1.5rem;
+        margin: 2.5rem 0;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    .pixel-jar-large {
+        width: 180px;
+        height: 220px;
+        max-width: 100%; /* Ensure jars scale down if screen is smaller */
+        height: auto; /* Maintain aspect ratio */
+    }
+    .pixel-lid {
+        height: 45px;
+        border-width: 5px;
+        max-width: 100%; /* Ensure lid scales */
+    }
+    .pixel-body {
+        height: 180px;
+        border-width: 5px;
+        max-width: 100%; /* Ensure body scales */
+    }
+    .veggie {
+        width: 30px;
+        height: 55px;
+        max-width: 100%; /* Ensure veggies scale */
+        height: auto;
+    }
+    .veggie.v1 { height: 65px; }
+    .veggie.v2 { height: 50px; }
+    .veggie.v3 { height: 60px; }
 
-    .question-text {
+    /* --- Quiz and Results Specific Adjustments --- */
+    .quiz-container {
+        margin: 1rem 0; /* Only top/bottom margin, horizontal space handled by main's padding */
+        padding: 1.5rem;
+        border-width: 4px;
+        box-shadow: 4px 4px 0 #bdc3c7, 8px 8px 0 rgba(0,0,0,0.2);
+        width: 100%; /* Essential: take full width of its parent (main) */
+        max-width: 100%; /* Essential: prevent overflow from inherent sizing */
+        box-sizing: border-box; /* Crucial for predictable width with padding/border */
+    }
+    .intro h1 {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+        word-break: break-word;
+    }
+    .intro p {
         font-size: 1.1rem;
-        line-height: 1.6;
-        margin-bottom: 1.5rem;
+        word-break: break-word;
     }
-
+    .pixel-jar {
+        transform: scale(0.9); /* Keep transform, but ensure it's contained */
+        max-width: 100%; /* Ensure scaled jar doesn't go off screen */
+        height: auto;
+    }
+    .start-button {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        max-width: 100%; /* Buttons can sometimes cause overflow */
+        box-sizing: border-box;
+        word-break: break-word;
+    }
+    .question-container {
+        padding: 1.8rem;
+        border-width: 3px;
+        box-shadow: 4px 4px 0 #7f8c8d, 8px 8px 0 rgba(0,0,0,0.15);
+        width: 100%; /* Essential: take full width */
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    .question-container h2 {
+        font-size: 1.4rem;
+        margin-bottom: 2rem;
+        word-break: break-word;
+    }
     .options-container {
-        gap: 1rem;
+        grid-template-columns: 1fr; /* Stack options on small screens */
+        gap: 1.2rem;
+        width: 100%; /* Ensure container fills width */
+        max-width: 100%;
+        box-sizing: border-box;
     }
-
     .option-button {
+        padding: 1.2rem;
         font-size: 0.95rem;
-        padding: 1rem 1.5rem;
-        margin-bottom: 0.8rem;
+        width: 100%; /* Ensure button fills its grid column */
+        max-width: 100%;
+        box-sizing: border-box;
+        word-break: break-word;
     }
-
     .progress-bar {
-        margin: 1.5rem 0;
+        height: 30px;
+        border-width: 4px;
+        width: calc(100% - 2rem); /* Account for main's padding */
+        max-width: 90%; /* Keeping original max-width if desired */
+        box-sizing: border-box;
     }
-
-    .navigation-buttons {
-        gap: 1rem;
-        margin-top: 1.5rem;
+    .result-content {
+        padding: 2rem;
+        border-width: 4px;
+        box-shadow: 4px 4px 0 #7f8c8d, 8px 8px 0 rgba(0,0,0,0.15);
+        width: 100%; /* Ensure it takes full width of its parent */
+        max-width: 100%; /* CRITICAL: Override any larger fixed max-width */
+        box-sizing: border-box;
     }
+    .result-title {
+        font-size: 2rem;
+        word-break: break-word;
+    }
+    /* ... existing result-related styles ... */
 
-    .prev-button,
-    .next-button,
-    .submit-button {
-        font-size: 0.9rem;
-        padding: 1rem 1.5rem;
+    .modal-content {
+        padding: 25px;
+        border-width: 4px;
+        width: auto; /* Allow content to dictate width */
+        max-width: calc(100% - 2rem); /* Constrain by viewport edges, accounting for padding */
+        box-sizing: border-box;
+    }
+    .modal-title {
+        font-size: 1.8em;
+        word-break: break-word;
+    }
+    .modal-icon {
+        font-size: 3.2em; /* Ensure icons don't get too large */
+        max-width: 100%;
+        height: auto;
+    }
+    .modal-body {
+        font-size: 1.1em;
+        word-break: break-word;
+    }
+    .modal-button {
+        padding: 15px 30px;
+        font-size: 1em;
+        width: 100%; /* Ensure buttons fill modal width */
+        max-width: 100%;
+        box-sizing: border-box;
+        word-break: break-word;
     }
 }
 
-@media screen and (max-width: 480px) {
-    .quiz-container,
-    .quiz-container.result {
-        margin: 0.5rem;
-        padding: 1rem;
-    }
-
-    .quiz-title {
-        font-size: 1.5rem;
-        text-shadow: 2px 2px 0 #fff, 4px 4px 0 rgba(0, 0, 0, 0.15);
-    }
-
-    .question-text {
-        font-size: 1rem;
-        line-height: 1.5;
-    }
-
-    .option-button {
-        font-size: 0.9rem;
-        padding: 0.8rem 1.2rem;
-    }
-
-    .prev-button,
-    .next-button,
-    .submit-button {
-        font-size: 0.8rem;
-        padding: 0.8rem 1.2rem;
+@media (max-width: 480px) {
+    /* --- Further Adjustments for Smallest Screens --- */
+    main {
+        max-width: 100%;
+        padding: 0 0.5rem; /* Even smaller horizontal padding for very small screens */
         width: 100%;
+        box-sizing: border-box;
     }
 
-    .navigation-buttons {
-        flex-direction: column;
-        gap: 0.8rem;
+    .title {
+        font-size: 1.8rem;
+        text-shadow: 2px 2px 0 #fff, 4px 4px 0 rgba(0,0,0,0.1);
+    }
+    .subtitle {
+        font-size: 0.9rem;
+    }
+    .intro-description p {
+        font-size: 0.9em;
+    }
+    .ferment-preview {
+        padding: 1.2rem;
+    }
+    .ferment-preview .icon {
+        font-size: 2em;
+    }
+    .ferment-preview h3 {
+        font-size: 1rem;
+    }
+    .enter-button.pixel-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    .pixel-jar-large {
+        width: 150px;
+        height: 190px;
+    }
+    .pixel-lid {
+        height: 35px;
+        border-width: 4px;
+    }
+    .pixel-body {
+        height: 160px;
+        border-width: 4px;
+    }
+    .veggie {
+        width: 25px;
+        height: 45px;
+    }
+    .veggie.v1 { height: 55px; }
+    .veggie.v2 { height: 40px; }
+    .veggie.v3 { height: 50px; }
+
+    .quiz-container {
+        margin: 0.5rem 0;
+        padding: 1rem;
+        border-width: 3px;
+        box-shadow: 3px 3px 0 #bdc3c7, 6px 6px 0 rgba(0,0,0,0.2);
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    .intro h1 {
+        font-size: 1.5rem;
+    }
+    .intro p {
+        font-size: 0.9em;
+    }
+    .pixel-jar {
+        transform: scale(0.8);
+    }
+    .start-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    .question-container {
+        padding: 1.2rem;
+        border-width: 2px;
+        box-shadow: 2px 2px 0 #7f8c8d, 4px 4px 0 rgba(0,0,0,0.15);
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    .question-container h2 {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+    }
+    .options-container {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+    .option-button {
+        padding: 1rem;
+        font-size: 0.8rem;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    .progress-bar {
+        height: 25px;
+        border-width: 3px;
+        width: calc(100% - 1rem); /* Account for main's padding */
+        max-width: 90%;
+        box-sizing: border-box;
+    }
+    .result-content {
+        padding: 1.5rem;
+        border-width: 3px;
+        box-shadow: 3px 3px 0 #7f8c8d, 6px 6px 0 rgba(0,0,0,0.15);
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    .result-title {
+        font-size: 1.8rem;
+    }
+    .result-description {
+        font-size: 0.9em;
+    }
+    .characteristics h3, .compatibility-section h3, .personality-insights h3 {
+        font-size: 1rem;
+    }
+    .trait-item, .insight-item {
+        font-size: 0.9em;
+        padding: 0.6rem;
+    }
+    .compatibility-container, .insights-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .return-button, .restart-button {
+        width: 100%;
+        font-size: 1rem;
+        padding: 1rem 2rem;
+    }
+    .modal-content {
+        padding: 15px;
+        border-width: 3px;
+        width: auto;
+        max-width: calc(100% - 1rem);
+        box-sizing: border-box;
+    }
+    .modal-title {
+        font-size: 1.4em;
+    }
+    .modal-icon {
+        font-size: 2.2em;
+    }
+    .modal-body {
+        font-size: 0.9em;
+    }
+    .modal-button {
+        padding: 12px 25px;
+        font-size: 0.9em;
     }
 }
