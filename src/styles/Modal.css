@@ -94,3 +94,47 @@
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
 }
+
+/* Responsive adjustments for modal on mobile */
+@media screen and (max-width: 480px) {
+  .modal-content {
+    padding: 1.5rem;
+    width: 85%;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .modal-header h2 {
+    font-size: 1.2rem;
+    line-height: 1.4;
+    /* Ensure pixel fonts are readable */
+    letter-spacing: 0.5px;
+  }
+
+  .modal-icon {
+    font-size: 2rem;
+  }
+
+  /* Improve text readability in modal content */
+  .modal-content p, 
+  .modal-content div,
+  .modal-content span {
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.3px;
+  }
+
+  /* Ensure buttons are large enough to tap */
+  .modal-content button {
+    min-height: 44px;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+}
+
+/* Prevent zoom on mobile when focusing inputs */
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+  font-size: 16px;
+}

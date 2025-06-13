@@ -424,6 +424,36 @@ footer {
   }
 }
 
+/* Responsive Typography */
+@media screen and (max-width: 768px) {
+  .App-header h1 {
+    font-size: 1.25rem;
+  }
+
+  .App-header p {
+    font-size: 1rem;
+  }
+
+  main {
+    font-size: 16px;
+  }
+}
+
+/* Ensure minimum text size on mobile */
+@media screen and (max-width: 480px) {
+  body {
+    font-size: 16px;
+  }
+  
+  .App-header {
+    font-size: calc(14px + 1vmin);
+  }
+  
+  button, input, select, textarea {
+    font-size: 16px; /* Prevents iOS from zooming on input focus */
+  }
+}
+
 /* --- Modal Overlay --- */
 .modal-overlay {
     position: fixed; /* Stays in place even when scrolling */

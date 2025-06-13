@@ -1,12 +1,14 @@
 /* General Body and App Container Styles */
 body {
     margin: 0;
-    font-family: 'Pixelify Sans', sans-serif; /* Primary content font */
-    -webkit-font-smoothing: none; /* Changed from antialiased to 'none' for sharp pixel rendering */
-    -moz-osx-font-smoothing: grayscale; /* Can also be 'none' for consistency, but 'grayscale' often works fine */
-    image-rendering: pixelated; /* Crucial for ensuring pixel art sharpness throughout */
-    overflow-x: hidden; /* Prevent horizontal scroll */
-    background: #ecf0f1; /* Default background for the whole app */
+    font-family: 'Pixelify Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif; /* Added fallback fonts */
+    -webkit-font-smoothing: antialiased; /* Changed back to antialiased for better readability */
+    -moz-osx-font-smoothing: grayscale;
+    image-rendering: auto; /* Changed from pixelated for better text rendering */
+    overflow-x: hidden;
+    background: #ecf0f1;
+    font-size: 16px; /* Base font size */
+    line-height: 1.5; /* Improved line height for readability */
 }
 
 code {
@@ -648,7 +650,6 @@ footer {
         rgba(255,255,255,0.2) 0%, /* More visible shine */
         rgba(255,255,255,0) 100%
     );
-    z-index: 1;
 }
 
 .option-button:hover {
@@ -673,6 +674,57 @@ footer {
     color: white;
     box-shadow: 6px 6px 0 #56a861; /* Green shadow */
     transform: translateY(0); /* Reset transform */
+}
+
+/* Mobile-optimized typography and spacing */
+@media screen and (max-width: 480px) {
+  .quiz-container {
+    padding: 1rem;
+  }
+
+  .quiz-question {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.3px;
+  }
+
+  .quiz-options {
+    gap: 12px;
+  }
+
+  .quiz-option {
+    padding: 12px 16px;
+    min-height: 44px; /* Minimum touch target size */
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  /* Improve readability of pixel fonts on mobile */
+  [class*="pixel-font"] {
+    letter-spacing: 0.5px;
+    word-spacing: 1px;
+  }
+
+  /* Ensure sufficient spacing between interactive elements */
+  button, 
+  .clickable {
+    margin: 8px 0;
+    padding: 12px 20px;
+    min-height: 44px;
+  }
+}
+
+/* Prevent text from becoming too small */
+@media screen and (max-width: 320px) {
+  .quiz-question {
+    font-size: 16px;
+  }
+
+  .quiz-option {
+    font-size: 15px;
+    padding: 10px 14px;
+  }
 }
 
 /* --- Progress Bar --- */
@@ -1492,6 +1544,10 @@ footer {
     .question-container h2 {
         font-size: 1.1rem;
         margin-bottom: 1.5rem;
+    }
+    .options-container {
+        grid-template-columns: 1fr; /* Stack options on small screens */
+        gap: 1.2rem;
     }
     .option-button {
         padding: 1rem;
