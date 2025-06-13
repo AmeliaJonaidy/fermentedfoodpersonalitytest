@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/fermentedfoodpersonalitytest/static/css/main.656c568d.css",
+    "main.css": "/fermentedfoodpersonalitytest/static/css/main.fe2473ae.css",
     "main.js": "/fermentedfoodpersonalitytest/static/js/main.dec55421.js",
     "static/js/453.d540fea4.chunk.js": "/fermentedfoodpersonalitytest/static/js/453.d540fea4.chunk.js",
     "index.html": "/fermentedfoodpersonalitytest/index.html",
-    "main.656c568d.css.map": "/fermentedfoodpersonalitytest/static/css/main.656c568d.css.map",
+    "main.fe2473ae.css.map": "/fermentedfoodpersonalitytest/static/css/main.fe2473ae.css.map",
     "main.dec55421.js.map": "/fermentedfoodpersonalitytest/static/js/main.dec55421.js.map",
     "453.d540fea4.chunk.js.map": "/fermentedfoodpersonalitytest/static/js/453.d540fea4.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.656c568d.css",
+    "static/css/main.fe2473ae.css",
     "static/js/main.dec55421.js"
   ]
 }
