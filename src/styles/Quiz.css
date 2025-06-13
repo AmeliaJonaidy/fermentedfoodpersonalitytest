@@ -1,40 +1,90 @@
-/* General Body and App Container Styles */
-body {
-    margin: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; /* Replaced with system fonts */
-    -webkit-font-smoothing: antialiased; /* Changed back to antialiased for better readability */
-    -moz-osx-font-smoothing: grayscale;
-    image-rendering: auto; /* Changed from pixelated for better text rendering */
-    overflow-x: hidden;
-    background: #ecf0f1;
-    font-size: 16px; /* Base font size */
-    line-height: 1.5; /* Improved line height for readability */
+/* --- Global HTML and Body Styles --- */
+html {
+    box-sizing: border-box; /* Crucial for predictable layout calculations */
+    /* Set a base font size for rem units (optional, but good practice for scaling) */
+    /* font-size: 100%; /* Default 16px. Can be 62.5% for 1rem = 10px convenience */
+    /* Consider if you want overflow-x: hidden here or on body. Usually, it's a symptom, not a fix. */
+    overflow-x: hidden; /* Hides horizontal scrollbar globally. Use with caution! */
 }
 
+*, *::before, *::after {
+    box-sizing: inherit; /* All elements inherit border-box model */
+    /* Ensure flex/grid items can shrink below their content size if needed,
+       preventing layout overflow in flex/grid contexts. */
+    min-width: 0;
+    min-height: 0;
+}
+
+body {
+    margin: 0; /* Remove default body margin */
+    /* Modern system font stack for optimal readability across devices */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased; /* Smoother text rendering for Webkit browsers */
+    -moz-osx-font-smoothing: grayscale; /* Smoother text rendering for Firefox */
+    
+    /* image-rendering: auto; is good for standard images.
+       If specific pixel art is only on certain elements (like the logo),
+       apply pixelated directly to those elements. Keep 'auto' here for general purpose. */
+    image-rendering: auto; 
+    
+    /* Removed overflow-x: hidden from here as it's now on html for global effect.
+       Consider removing it entirely if you fix all horizontal overflow issues directly. */
+    
+    background: #ecf0f1; /* Your chosen background color */
+    font-size: 16px; /* Base font size, for elements using px or as reference for rem */
+    line-height: 1.5; /* Improved line height for better readability */
+    color: #333; /* Default text color for better contrast */
+    text-rendering: optimizeLegibility; /* Can improve kerning and ligatures */
+}
+
+/* --- Code Block Styles --- */
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    font-size: 0.9em; /* Slightly smaller for code blocks */
+    background-color: rgba(0, 0, 0, 0.05); /* Light background for code */
+    padding: 0.1em 0.4em;
+    border-radius: 3px;
 }
 
+/* --- Main Application Container Styles --- */
 .App {
-    text-align: center;
-    min-height: 100vh;
+    text-align: center; /* Center inline/text content within the App container */
+    min-height: 100vh; /* Ensure the app takes at least the full viewport height */
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative; /* For general overlay/z-index context if needed */
+    flex-direction: column; /* Stack children vertically */
+    justify-content: center; /* Center children vertically within App */
+    align-items: center; /* Center children horizontally within App */
+    position: relative; /* Provides a positioning context for absolutely positioned children */
+    
+    width: 100%; /* Ensure .App always takes 100% of its parent's width */
+    max-width: 100%; /* Explicitly cap .App width to prevent overflow */
+    box-sizing: border-box; /* Ensure padding/border are included in width calculation */
+    overflow: hidden; /* Prevent any direct child of .App from causing horizontal scroll */
 }
 
-/* App Logo (if used, typically removed for landing page apps) */
+/* --- App Logo (if used) --- */
 .App-logo {
-    height: 40vmin;
-    pointer-events: none;
-    image-rendering: pixelated; /* Ensure logo maintains pixel art sharpness */
+    height: 40vmin; /* Responsive height based on viewport dimensions */
+    pointer-events: none; /* Prevents interaction with the logo */
+    image-rendering: pixelated; /* Specific for pixel art logos, overriding general 'auto' */
+    max-width: 100%; /* Ensure the logo itself doesn't overflow */
+    height: auto; /* Maintain aspect ratio */
 }
 
+/* --- Animation for App Logo --- */
 @media (prefers-reduced-motion: no-preference) {
     .App-logo {
         animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+/* --- Keyframe Animation (Define this if not already present) --- */
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
     }
 }
 
@@ -1337,194 +1387,187 @@ footer {
 
 
 /* --- Responsive Design --- */
-@media (max-width: 992px) {
-    .title {
-        font-size: 2.8rem;
-        text-shadow: 4px 4px 0 #fff, 8px 8px 0 rgba(0,0,0,0.1);
-    }
-    .subtitle {
-        font-size: 1.1rem;
-    }
-    .intro-description p {
-        font-size: 1.1rem;
-    }
-    .ferment-types {
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 1.5rem;
-    }
-    .ferment-preview {
-        padding: 2rem;
-    }
-    .ferment-preview .icon {
-        font-size: 2.8em;
-    }
-    .ferment-preview h3 {
-        font-size: 1.3rem;
-    }
-    .enter-button.pixel-button {
-        padding: 1.2rem 2.5rem;
-        font-size: 1.2rem;
-    }
-
-    .quiz-container {
-        padding: 2rem;
-        border-width: 5px;
-        box-shadow: 6px 6px 0 #bdc3c7, 12px 12px 0 rgba(0,0,0,0.2);
-    }
-    .question-container h2 {
-        font-size: 1.6rem;
-    }
-    .options-container {
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    }
-    .option-button {
-        padding: 1.5rem;
-    }
-    .result-title {
-        font-size: 2.4rem;
-    }
-    .modal-content {
-        max-width: 500px;
-        padding: 35px;
-    }
-    .modal-title {
-        font-size: 2em;
-    }
-}
-
 @media (max-width: 768px) {
+    /* --- Aggressive Mobile Layout Adjustments for Main Content Area --- */
+    main {
+        max-width: 100%; /* Override default max-width to fill the screen */
+        padding: 0 1rem; /* Add consistent horizontal padding for smaller screens */
+        width: 100%; /* Ensure main stretches fully */
+        box-sizing: border-box;
+    }
+
     .landing-page {
         padding: 1.5rem;
+        width: 100%; /* Ensure it fills main's width */
+        max-width: 100%;
+        box-sizing: border-box;
     }
     .title {
         font-size: 2.2rem;
         text-shadow: 3px 3px 0 #fff, 6px 6px 0 rgba(0,0,0,0.1);
+        word-break: break-word; /* Ensure title text wraps if long */
     }
     .subtitle {
         font-size: 1rem;
+        word-break: break-word;
     }
     .intro-description p {
         font-size: 1rem;
+        word-break: break-word;
     }
     .ferment-types {
         grid-template-columns: 1fr; /* Stack on small screens */
         gap: 1.5rem;
         margin: 2.5rem 0;
-        width: 100%; /* Ensure ferment types container also takes full width */
+        width: 100%;
+        max-width: 100%;
         box-sizing: border-box;
     }
     .pixel-jar-large {
         width: 180px;
         height: 220px;
+        max-width: 100%; /* Ensure jars scale down if screen is smaller */
+        height: auto; /* Maintain aspect ratio */
     }
     .pixel-lid {
         height: 45px;
         border-width: 5px;
+        max-width: 100%; /* Ensure lid scales */
     }
     .pixel-body {
         height: 180px;
         border-width: 5px;
+        max-width: 100%; /* Ensure body scales */
     }
     .veggie {
         width: 30px;
         height: 55px;
+        max-width: 100%; /* Ensure veggies scale */
+        height: auto;
     }
     .veggie.v1 { height: 65px; }
     .veggie.v2 { height: 50px; }
     .veggie.v3 { height: 60px; }
 
-    /* --- Core Fixes for Quiz/Result Layout --- */
-    main {
-        max-width: 100%; /* Override general max-width to allow full width */
-        padding: 0 1rem; /* Add some horizontal padding to main content area */
-        width: 100%; /* Ensure main stretches */
-        box-sizing: border-box; /* Critical */
-    }
-
+    /* --- Quiz and Results Specific Adjustments --- */
     .quiz-container {
-        margin: 1rem 0; /* Adjust margin to only top/bottom if width is 100% */
+        margin: 1rem 0; /* Only top/bottom margin, horizontal space handled by main's padding */
         padding: 1.5rem;
         border-width: 4px;
         box-shadow: 4px 4px 0 #bdc3c7, 8px 8px 0 rgba(0,0,0,0.2);
-        width: 100%; /* Take full width of parent (main) */
-        max-width: 100%; /* Ensure it doesn't exceed */
+        width: 100%; /* Essential: take full width of its parent (main) */
+        max-width: 100%; /* Essential: prevent overflow from inherent sizing */
         box-sizing: border-box; /* Crucial for predictable width with padding/border */
     }
     .intro h1 {
         font-size: 1.8rem;
         margin-bottom: 2rem;
+        word-break: break-word;
     }
     .intro p {
         font-size: 1.1rem;
+        word-break: break-word;
     }
     .pixel-jar {
-        transform: scale(0.9);
+        transform: scale(0.9); /* Keep transform, but ensure it's contained */
+        max-width: 100%; /* Ensure scaled jar doesn't go off screen */
+        height: auto;
     }
     .start-button {
         padding: 1rem 2rem;
         font-size: 1rem;
+        max-width: 100%; /* Buttons can sometimes cause overflow */
+        box-sizing: border-box;
+        word-break: break-word;
     }
     .question-container {
         padding: 1.8rem;
         border-width: 3px;
         box-shadow: 4px 4px 0 #7f8c8d, 8px 8px 0 rgba(0,0,0,0.15);
-        width: 100%; /* Ensure it fills parent */
+        width: 100%; /* Essential: take full width */
         max-width: 100%;
         box-sizing: border-box;
     }
     .question-container h2 {
         font-size: 1.4rem;
         margin-bottom: 2rem;
+        word-break: break-word;
     }
     .options-container {
         grid-template-columns: 1fr; /* Stack options on small screens */
         gap: 1.2rem;
+        width: 100%; /* Ensure container fills width */
+        max-width: 100%;
+        box-sizing: border-box;
     }
     .option-button {
         padding: 1.2rem;
         font-size: 0.95rem;
+        width: 100%; /* Ensure button fills its grid column */
+        max-width: 100%;
+        box-sizing: border-box;
+        word-break: break-word;
     }
     .progress-bar {
         height: 30px;
         border-width: 4px;
-        width: calc(100% - 2rem); /* If it's directly in 'main', account for main's padding */
-        max-width: 90%; /* Keep your desired max width if it looks better */
+        width: calc(100% - 2rem); /* Account for main's padding */
+        max-width: 90%; /* Keeping original max-width if desired */
         box-sizing: border-box;
     }
     .result-content {
         padding: 2rem;
         border-width: 4px;
         box-shadow: 4px 4px 0 #7f8c8d, 8px 8px 0 rgba(0,0,0,0.15);
-        width: 100%; /* Make it take the full width of its parent */
-        max-width: 100%; /* Crucial: ensure no fixed max-width limits it */
-        box-sizing: border-box; /* Critical for predictable width with padding/border */
+        width: 100%; /* Ensure it takes full width of its parent */
+        max-width: 100%; /* CRITICAL: Override any larger fixed max-width */
+        box-sizing: border-box;
     }
     .result-title {
         font-size: 2rem;
+        word-break: break-word;
     }
+    /* ... existing result-related styles ... */
+
     .modal-content {
         padding: 25px;
         border-width: 4px;
-        max-width: calc(100% - 2rem); /* Account for padding from body/viewport edge */
-        width: auto; /* Allow it to shrink/grow based on max-width */
+        width: auto; /* Allow content to dictate width */
+        max-width: calc(100% - 2rem); /* Constrain by viewport edges, accounting for padding */
         box-sizing: border-box;
     }
     .modal-title {
         font-size: 1.8em;
+        word-break: break-word;
     }
     .modal-icon {
-        font-size: 3.2em;
+        font-size: 3.2em; /* Ensure icons don't get too large */
+        max-width: 100%;
+        height: auto;
     }
     .modal-body {
         font-size: 1.1em;
+        word-break: break-word;
     }
     .modal-button {
         padding: 15px 30px;
         font-size: 1em;
+        width: 100%; /* Ensure buttons fill modal width */
+        max-width: 100%;
+        box-sizing: border-box;
+        word-break: break-word;
     }
 }
 
 @media (max-width: 480px) {
+    /* --- Further Adjustments for Smallest Screens --- */
+    main {
+        max-width: 100%;
+        padding: 0 0.5rem; /* Even smaller horizontal padding for very small screens */
+        width: 100%;
+        box-sizing: border-box;
+    }
+
     .title {
         font-size: 1.8rem;
         text-shadow: 2px 2px 0 #fff, 4px 4px 0 rgba(0,0,0,0.1);
@@ -1568,15 +1611,8 @@ footer {
     .veggie.v2 { height: 40px; }
     .veggie.v3 { height: 50px; }
 
-    /* --- Core Fixes for Quiz/Result Layout --- */
-    main {
-        max-width: 100%;
-        padding: 0 0.5rem; /* Even smaller horizontal padding */
-        width: 100%;
-        box-sizing: border-box;
-    }
     .quiz-container {
-        margin: 0.5rem 0; /* Adjust margin to only top/bottom */
+        margin: 0.5rem 0;
         padding: 1rem;
         border-width: 3px;
         box-shadow: 3px 3px 0 #bdc3c7, 6px 6px 0 rgba(0,0,0,0.2);
@@ -1610,12 +1646,15 @@ footer {
         margin-bottom: 1.5rem;
     }
     .options-container {
-        grid-template-columns: 1fr; /* Stack options on small screens */
+        grid-template-columns: 1fr;
         gap: 1.2rem;
     }
     .option-button {
         padding: 1rem;
         font-size: 0.8rem;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
     .progress-bar {
         height: 25px;
@@ -1657,8 +1696,8 @@ footer {
     .modal-content {
         padding: 15px;
         border-width: 3px;
-        max-width: calc(100% - 1rem); /* Account for padding */
         width: auto;
+        max-width: calc(100% - 1rem);
         box-sizing: border-box;
     }
     .modal-title {
