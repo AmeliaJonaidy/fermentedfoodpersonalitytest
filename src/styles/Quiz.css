@@ -1407,9 +1407,11 @@ footer {
         font-size: 1rem;
     }
     .ferment-types {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Stack on small screens */
         gap: 1.5rem;
         margin: 2.5rem 0;
+        width: 100%; /* Ensure ferment types container also takes full width */
+        box-sizing: border-box;
     }
     .pixel-jar-large {
         width: 180px;
@@ -1431,11 +1433,22 @@ footer {
     .veggie.v2 { height: 50px; }
     .veggie.v3 { height: 60px; }
 
+    /* --- Core Fixes for Quiz/Result Layout --- */
+    main {
+        max-width: 100%; /* Override general max-width to allow full width */
+        padding: 0 1rem; /* Add some horizontal padding to main content area */
+        width: 100%; /* Ensure main stretches */
+        box-sizing: border-box; /* Critical */
+    }
+
     .quiz-container {
-        margin: 1rem;
+        margin: 1rem 0; /* Adjust margin to only top/bottom if width is 100% */
         padding: 1.5rem;
         border-width: 4px;
         box-shadow: 4px 4px 0 #bdc3c7, 8px 8px 0 rgba(0,0,0,0.2);
+        width: 100%; /* Take full width of parent (main) */
+        max-width: 100%; /* Ensure it doesn't exceed */
+        box-sizing: border-box; /* Crucial for predictable width with padding/border */
     }
     .intro h1 {
         font-size: 1.8rem;
@@ -1455,6 +1468,9 @@ footer {
         padding: 1.8rem;
         border-width: 3px;
         box-shadow: 4px 4px 0 #7f8c8d, 8px 8px 0 rgba(0,0,0,0.15);
+        width: 100%; /* Ensure it fills parent */
+        max-width: 100%;
+        box-sizing: border-box;
     }
     .question-container h2 {
         font-size: 1.4rem;
@@ -1471,12 +1487,17 @@ footer {
     .progress-bar {
         height: 30px;
         border-width: 4px;
-        width: 90%;
+        width: calc(100% - 2rem); /* If it's directly in 'main', account for main's padding */
+        max-width: 90%; /* Keep your desired max width if it looks better */
+        box-sizing: border-box;
     }
     .result-content {
         padding: 2rem;
         border-width: 4px;
         box-shadow: 4px 4px 0 #7f8c8d, 8px 8px 0 rgba(0,0,0,0.15);
+        width: 100%; /* Make it take the full width of its parent */
+        max-width: 100%; /* Crucial: ensure no fixed max-width limits it */
+        box-sizing: border-box; /* Critical for predictable width with padding/border */
     }
     .result-title {
         font-size: 2rem;
@@ -1484,6 +1505,9 @@ footer {
     .modal-content {
         padding: 25px;
         border-width: 4px;
+        max-width: calc(100% - 2rem); /* Account for padding from body/viewport edge */
+        width: auto; /* Allow it to shrink/grow based on max-width */
+        box-sizing: border-box;
     }
     .modal-title {
         font-size: 1.8em;
@@ -1544,11 +1568,21 @@ footer {
     .veggie.v2 { height: 40px; }
     .veggie.v3 { height: 50px; }
 
+    /* --- Core Fixes for Quiz/Result Layout --- */
+    main {
+        max-width: 100%;
+        padding: 0 0.5rem; /* Even smaller horizontal padding */
+        width: 100%;
+        box-sizing: border-box;
+    }
     .quiz-container {
-        margin: 0.5rem;
+        margin: 0.5rem 0; /* Adjust margin to only top/bottom */
         padding: 1rem;
         border-width: 3px;
         box-shadow: 3px 3px 0 #bdc3c7, 6px 6px 0 rgba(0,0,0,0.2);
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
     .intro h1 {
         font-size: 1.5rem;
@@ -1567,6 +1601,9 @@ footer {
         padding: 1.2rem;
         border-width: 2px;
         box-shadow: 2px 2px 0 #7f8c8d, 4px 4px 0 rgba(0,0,0,0.15);
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
     .question-container h2 {
         font-size: 1.1rem;
@@ -1583,11 +1620,17 @@ footer {
     .progress-bar {
         height: 25px;
         border-width: 3px;
+        width: calc(100% - 1rem); /* Account for main's padding */
+        max-width: 90%;
+        box-sizing: border-box;
     }
     .result-content {
         padding: 1.5rem;
         border-width: 3px;
         box-shadow: 3px 3px 0 #7f8c8d, 6px 6px 0 rgba(0,0,0,0.15);
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
     .result-title {
         font-size: 1.8rem;
@@ -1614,6 +1657,9 @@ footer {
     .modal-content {
         padding: 15px;
         border-width: 3px;
+        max-width: calc(100% - 1rem); /* Account for padding */
+        width: auto;
+        box-sizing: border-box;
     }
     .modal-title {
         font-size: 1.4em;
