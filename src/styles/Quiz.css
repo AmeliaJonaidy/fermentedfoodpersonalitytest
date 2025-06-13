@@ -1560,6 +1560,15 @@ footer {
     }
 }
 
+/* Your existing Quiz.css styles go here (e.g., base styles for desktop/larger screens, and the @media (max-width: 768px) block from the previous response) */
+
+/* Example of previously provided mobile styles (if you have them) */
+@media (max-width: 768px) {
+  /* ... (styles for phones/tablets) ... */
+}
+
+
+/* --- START of styles you provided for @media (max-width: 480px) --- */
 @media (max-width: 480px) {
     /* --- Further Adjustments for Smallest Screens --- */
     main {
@@ -1711,7 +1720,9 @@ footer {
         padding: 0.6rem;
     }
     .compatibility-container, .insights-container {
-        grid-template-columns: 1fr;
+        /* Changed to flexbox for better vertical stacking on small screens */
+        display: flex;
+        flex-direction: column;
         gap: 1.5rem;
     }
     .return-button, .restart-button {
@@ -1754,3 +1765,4 @@ footer {
         word-break: break-word;
     }
 }
+/* --- END of styles you provided for @media (max-width: 480px) --- */

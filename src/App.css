@@ -408,50 +408,114 @@ footer {
 .b2 { animation-delay: 0.5s; }
 .b3 { animation-delay: 1s; }
 
-/* Responsive improvements */
+/* --- General Responsive Improvements for Tablets and Phones (up to 768px) --- */
 @media (max-width: 768px) {
+  /* Layout adjustments for multi-column sections */
   .ferment-types {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Stack ferment types vertically */
   }
 
+  /* Padding and sizing for interactive elements */
   .ferment-preview {
-    padding: 1.5rem;
+    padding: 1.5rem; /* Adjust padding for touch targets */
   }
 
   .enter-button.pixel-button {
-    padding: 1rem 2rem;
-    font-size: 1rem;
+    padding: 1rem 2rem; /* Ensure button is easily tappable */
+    font-size: 1rem; /* Readable font size for buttons */
   }
-}
 
-/* Responsive Typography */
-@media screen and (max-width: 768px) {
+  /* --- Responsive Typography for Tablets and Phones (up to 768px) --- */
   .App-header h1 {
-    font-size: 1.25rem;
+    font-size: 1.25rem; /* Scale down main header */
   }
 
   .App-header p {
-    font-size: 1rem;
+    font-size: 1rem; /* Scale down subtext */
   }
 
   main {
-    font-size: 16px;
+    font-size: 16px; /* Base font size for main content */
   }
 }
 
-/* Ensure minimum text size on mobile */
-@media screen and (max-width: 480px) {
+/* --- Further Responsive Adjustments for Smallest Screens (up to 480px) --- */
+@media (max-width: 480px) {
   body {
-    font-size: 16px;
+    font-size: 16px; /* Ensure a minimum readable font size for the whole body */
   }
-  
+
+  /* Specific typography adjustments for very small screens */
   .App-header {
+    /* calc() provides a fluid size that scales between a min and max */
     font-size: calc(14px + 1vmin);
   }
-  
-  button, input, select, textarea {
-    font-size: 16px; /* Prevents iOS from zooming on input focus */
+
+  /* Form control fixes for mobile usability */
+  button,
+  input,
+  select,
+  textarea {
+    font-size: 16px; /* This is crucial: Prevents iOS from zooming on input/button focus */
   }
+
+  /* You can add more specific rules for very small screens here,
+     similar to the ones you provided in the previous turn if needed.
+     For example, further reducing padding or increasing line-height for readability. */
+}/* --- General Responsive Improvements for Tablets and Phones (up to 768px) --- */
+@media (max-width: 768px) {
+  /* Layout adjustments for multi-column sections */
+  .ferment-types {
+    grid-template-columns: 1fr; /* Stack ferment types vertically */
+  }
+
+  /* Padding and sizing for interactive elements */
+  .ferment-preview {
+    padding: 1.5rem; /* Adjust padding for touch targets */
+  }
+
+  .enter-button.pixel-button {
+    padding: 1rem 2rem; /* Ensure button is easily tappable */
+    font-size: 1rem; /* Readable font size for buttons */
+  }
+
+  /* --- Responsive Typography for Tablets and Phones (up to 768px) --- */
+  .App-header h1 {
+    font-size: 1.25rem; /* Scale down main header */
+  }
+
+  .App-header p {
+    font-size: 1rem; /* Scale down subtext */
+  }
+
+  main {
+    font-size: 16px; /* Base font size for main content */
+  }
+}
+
+/* --- Further Responsive Adjustments for Smallest Screens (up to 480px) --- */
+@media (max-width: 480px) {
+  body {
+    font-size: 16px; /* Ensure a minimum readable font size for the whole body */
+  }
+
+  /* Specific typography adjustments for very small screens */
+  .App-header {
+    /* calc() provides a fluid size that scales between a min and max */
+    font-size: calc(14px + 1vmin);
+  }
+
+  /* Form control fixes for mobile usability */
+  button,
+  input,
+  select,
+  textarea {
+    font-size: 16px; /* This is crucial: Prevents iOS from zooming on input/button focus */
+  }
+
+  /* You can add more specific rules for very small screens here,
+     similar to the ones you provided in the previous turn if needed.
+     For example, further reducing padding or increasing line-height for readability. */
 }
 
 /* --- Modal Overlay --- */
