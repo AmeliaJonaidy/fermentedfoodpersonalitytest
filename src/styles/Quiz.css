@@ -471,6 +471,7 @@ footer {
 .quiz-container {
     max-width: 1000px;
     min-height: 80vh;
+    font-family: sans-serif;
     margin: 2rem auto;
     padding: 3rem;
     background: #ecf0f1; /* Changed to solid for better pixel background contrast */
@@ -486,7 +487,7 @@ footer {
     position: relative;
     overflow: hidden;
     box-sizing: border-box; /* Crucial for consistent sizing */
-    image-rendering: pixelated; /* Ensure content inside stays pixelated */
+    /* image-rendering: pixelated; Ensure content inside stays pixelated */
 }
 
 /* Pixel art background texture for quiz container */
@@ -494,6 +495,7 @@ footer {
     content: '';
     position: absolute;
     top: 0;
+    font-family: sans-serif;
     left: 0;
     width: 100%;
     height: 100%;
@@ -623,7 +625,7 @@ footer {
 
 .option-button {
     padding: 1.8rem; /* More padding */
-    font-family: 'Press Start 2P';
+    font-family: sans-serif;
     font-size: 1.1rem; /* Slightly larger font */
     color: #2c3e50;
     background: #fff;
@@ -1231,7 +1233,7 @@ footer {
     font-size: 1.3em; /* Larger body text */
     line-height: 1.8;
     margin-bottom: 35px; /* More space */
-    font-family: 'Pixelify Sans', sans-serif;
+    font-family: sans-serif;
     color: #ecf0f1;
     text-shadow: 1px 1px #000;
 }
