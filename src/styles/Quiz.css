@@ -1572,12 +1572,15 @@ footer {
     .title {
         font-size: 1.8rem;
         text-shadow: 2px 2px 0 #fff, 4px 4px 0 rgba(0,0,0,0.1);
+        word-break: break-word; /* Ensure text breaks */
     }
     .subtitle {
         font-size: 0.9rem;
+        word-break: break-word;
     }
     .intro-description p {
         font-size: 0.9em;
+        word-break: break-word;
     }
     .ferment-preview {
         padding: 1.2rem;
@@ -1595,18 +1598,24 @@ footer {
     .pixel-jar-large {
         width: 150px;
         height: 190px;
+        max-width: 100%;
+        height: auto;
     }
     .pixel-lid {
         height: 35px;
         border-width: 4px;
+        max-width: 100%;
     }
     .pixel-body {
         height: 160px;
         border-width: 4px;
+        max-width: 100%;
     }
     .veggie {
         width: 25px;
         height: 45px;
+        max-width: 100%;
+        height: auto;
     }
     .veggie.v1 { height: 55px; }
     .veggie.v2 { height: 40px; }
@@ -1623,16 +1632,23 @@ footer {
     }
     .intro h1 {
         font-size: 1.5rem;
+        word-break: break-word;
     }
     .intro p {
         font-size: 0.9em;
+        word-break: break-word;
     }
     .pixel-jar {
         transform: scale(0.8);
+        max-width: 100%;
+        height: auto;
     }
     .start-button {
         padding: 0.8rem 1.5rem;
         font-size: 0.9rem;
+        max-width: 100%;
+        box-sizing: border-box;
+        word-break: break-word;
     }
     .question-container {
         padding: 1.2rem;
@@ -1645,6 +1661,7 @@ footer {
     .question-container h2 {
         font-size: 1.1rem;
         margin-bottom: 1.5rem;
+        word-break: break-word;
     }
     .options-container {
         grid-template-columns: 1fr;
@@ -1656,6 +1673,7 @@ footer {
         width: 100%;
         max-width: 100%;
         box-sizing: border-box;
+        word-break: break-word;
     }
     .progress-bar {
         height: 25px;
@@ -1664,20 +1682,26 @@ footer {
         max-width: 90%;
         box-sizing: border-box;
     }
+    
+    /* --- UPDATED RESULT CONTENT STYLES --- */
     .result-content {
         margin: 0.5rem 0;
         padding: 1rem;
         border-width: 3px;
-        box-shadow: 3px 3px 0 #7f8c8d, 6px 6px 0 rgba(0,0,0,0.15);
+        /* Updated box-shadow to match .quiz-container's shadow */
+        box-shadow: 3px 3px 0 #bdc3c7, 6px 6px 0 rgba(0,0,0,0.2);
         width: 100%;
         max-width: 100%;
         box-sizing: border-box;
     }
     .result-title {
-        font-size: 1.8rem;
+        /* Updated font-size to match .intro h1 in quiz-container */
+        font-size: 1.5rem;
+        word-break: break-word;
     }
     .result-description {
         font-size: 0.9em;
+        word-break: break-word;
     }
     .characteristics h3, .compatibility-section h3, .personality-insights h3 {
         font-size: 1rem;
@@ -1691,10 +1715,16 @@ footer {
         gap: 1.5rem;
     }
     .return-button, .restart-button {
-        width: 100%;
-        font-size: 1rem;
-        padding: 1rem 2rem;
+        /* Updated padding and font-size to match .start-button */
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+        width: 100%; /* Keep 100% width unless specified otherwise */
+        max-width: 100%;
+        box-sizing: border-box;
+        word-break: break-word;
     }
+    /* --- END UPDATED RESULT CONTENT STYLES --- */
+
     .modal-content {
         padding: 15px;
         border-width: 3px;
@@ -1704,15 +1734,23 @@ footer {
     }
     .modal-title {
         font-size: 1.4em;
+        word-break: break-word;
     }
     .modal-icon {
         font-size: 2.2em;
+        max-width: 100%;
+        height: auto;
     }
     .modal-body {
         font-size: 0.9em;
+        word-break: break-word;
     }
     .modal-button {
         padding: 12px 25px;
         font-size: 0.9em;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        word-break: break-word;
     }
 }
